@@ -8,7 +8,7 @@ lst = os.listdir("./Files")
 path = "./Files/"
 
 # First File
-output = pd.read_excel(path + lst[0], header=1, skiprows=7)
+output = pd.read_excel(path + lst[0], skiprows=8)
 
 # Create ID
 output["ID"] = lst[0]
