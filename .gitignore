@@ -1,2 +1,6 @@
 Files/
 *.csv
+.Rproj.user
+*.rda
+*.RData
+*.Rproj

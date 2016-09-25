@@ -11,27 +11,28 @@ import os
 import pandas as pd
 
 # Get list of files in directory
-lst = os.listdir("./Files")
+lst = sorted(os.listdir("./Files", ))
 
 # Path to Files
 path = "./Files/"
 
+# Variable Start/Stop
+x1 = 0
+
 # First File
-output = pd.read_excel(path + lst[0], header=0, skiprows=8, parse_cols="A:J")
+output = pd.read_excel(path + lst[x1], header=8, parse_cols="A:J")
 
 # Create ID
-output["ID"] = lst[0]
+output["ID"] = lst[x1]
 
 # Loop for all of the files in
-for x in lst[1:100]:
-    tmp = pd.read_excel(path + x, header=0, skiprows=8, parse_cols="A:J")
+for x in lst[x1+1:]:
+    tmp = pd.read_excel(path + x, header=8, parse_cols="A:J")
     tmp["ID"] = x
-    output = output.append(tmp, ignore_index=True)
+    output = output.append(tmp)
 
 # Create some ID columns
 output["ID"] = output["ID"].str[:8]
-output["Subject"] = output["ID"].str[:4]
-output["Simulation"] = output["ID"].str[-3:]
 
 # Export data
 output.to_csv("data.csv", index=False)
