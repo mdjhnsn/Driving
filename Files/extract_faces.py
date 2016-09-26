@@ -1,11 +1,11 @@
-#!/bin/python
-#
-# Python program for extracting data out of all of the excel files associated with this project
-#
-# This Program assumes its being exectuted from the parent directory and at that all of the excel
-# appear in the /Files/Faces directory.
-#
-# It will write a single csv file the parent directory (~750MB)
+#!/usr/bin/env python
+'''
+Python program to extract faces data and append to a single large csv file (>600MB)
+
+File Issues: manually fix these so that the header row is 8
+  - T000-000: header starts on row 9
+  - T000-000: header starts on row 7
+'''
 
 
 import os
