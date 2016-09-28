@@ -3,8 +3,8 @@
 Python program to extract faces data and append to a single large csv file (>600MB)
 
 File Issues: manually fix these so that the header row is 8
-  - T000-000: header starts on row 9
-  - T000-000: header starts on row 7
+  - T034-005.xlsx: header starts on row 9
+  - T009-006.xlsx: header starts on row 7
 '''
 
 
