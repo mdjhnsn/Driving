@@ -22,5 +22,5 @@ Driving/
 **Steps**:
   1) Execute `python extract_faces.py` from the Files/ folder.
   2) Execute `python extract_stimuli.py` from the Files/ folder.
-  3) The py scripts should produce 2 files (data_faces.csv, data_stimuli.csv)
+  3) The py scripts should produce 2 files (data_faces.csv, data_stimuli.csv).
   4) If you have an Rstudio Project File in the home project file then source `01_Data_Prep.R`, otherwise you will first need to set the working directory for home directory of the Project  
