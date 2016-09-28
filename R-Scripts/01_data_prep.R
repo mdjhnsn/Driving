@@ -1,18 +1,53 @@
+rm(list = ls())
+
+library(xlsx)
+library(plyr)
+
 ## Import Data
 faces = read.csv("Files/data-faces.csv")
 stimuli = read.csv("Files/data-stimuli.csv")
+demograph = read.xlsx("Files/Other/Subject Biographic Info.xlsx", sheetIndex = 1)
 
 faces$Event.Switch = 0
+faces$Event = ""
 
 ## Join the datasets
-for (i in 1:nrow(faces)) {
+for (i in 1:nrow(stimuli)) {
   
   x = stimuli[i, ]
+  x.id = as.character(x$ID)
+  x.str = as.numeric(x$StartTime)
+  x.end = as.numeric(x$EndTime)
   
-  faces$Event.Switch[
-    stimuli$ID == x$ID & 
-      stimuli$Time >= x$StartTime & 
-      stimuli$Time <= x$EndTime
-    ] = 1
+  x.event.switch = as.numeric(x$Event.Switch)
+  x.event = as.character(x$Question.Number)
   
+  faces$Event.Switch[which(faces$ID %in% x.id & faces$Time >= x.str & faces$Time <= x.end)] = x.event.switch
+  faces$Event[which(faces$ID %in% x.id & faces$Time >= x.str & faces$Time <= x.end)] = x.event
 }
+
+rm(x, x.id, x.str, x.end, x.event.switch, x.event, i)
+
+## Splits Subjects from Trials
+faces$Subject = substr(faces$ID, 1, 4)
+faces$Trial = substr(faces$ID, 6, 8)
+
+## Join demographics with faces and stimuli data
+faces = join(faces, demograph)
+
+## Factor the strings
+faces$Event = factor(faces$Event)
+faces$Subject = factor(faces$Subject)
+faces$Trial = factor(faces$Trial)
+faces$Age = factor(faces$Age)
+faces$Gender = factor(faces$Gender)
+
+## A few rows have no data in the faces, setting those to 0
+faces[is.na(faces)] = 0
+
+## Adjust Column position and names
+colnames(faces)[1] = "Frame"
+faces = faces[, c(11, 14:17, 1:2, 12:13, 3:10)]
+
+## Saves Data Frame
+save("faces", file = "R-Data/faces.rda")

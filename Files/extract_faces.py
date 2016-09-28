@@ -2,9 +2,9 @@
 '''
 Python program to extract faces data and append to a single large csv file (>600MB)
 
-File Issues: manually fix these so that the header row is 8
-  - T034-005.xlsx: header starts on row 9
-  - T009-006.xlsx: header starts on row 7
+File Issues: manually fix these so that the header row is 9
+  - T034-005.xlsx: header starts on row 8
+  - T009-006.xlsx: header starts on row 10
 '''
 
 
@@ -12,10 +12,10 @@ import os
 import pandas as pd
 
 # Get list of files in directory
-lst = sorted(os.listdir("./Files/Faces"))
+lst = sorted(os.listdir("Faces"))
 
 # Path to Files
-path = "./Files/Faces/"
+path = "Faces/"
 
 # Variable Start/Stop
 x1 = 0
@@ -36,4 +36,4 @@ for x in lst[x1 + 1:]:
 output["ID"] = output["ID"].str[:8]
 
 # Export data
-output.to_csv("data.csv", index=False)
+output.to_csv("data-faces.csv", index=False)
