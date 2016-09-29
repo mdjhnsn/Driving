@@ -1,7 +1,5 @@
 Files/Faces/
 Files/Stimuli/
-*.csv
+Files/*.csv
 .Rproj.user
-*.rda
 *.RData
-*.Rproj
