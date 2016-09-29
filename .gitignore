@@ -3,3 +3,4 @@ Files/Stimuli/
 Files/*.csv
 .Rproj.user
 *.RData
+*.rda
