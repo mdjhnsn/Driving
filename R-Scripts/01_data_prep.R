@@ -1,12 +1,11 @@
 rm(list = ls())
 
-library(xlsx)
 library(plyr)
 
 ## Import Data
 faces = read.csv("Files/data-faces.csv")
 stimuli = read.csv("Files/data-stimuli.csv")
-demograph = read.xlsx("Files/Other/Subject Biographic Info.xlsx", sheetIndex = 1)
+demograph = read.csv("Files/Other/Subject Biographic Info.csv")
 
 faces$Event.Switch = 0
 faces$Event = ""
