@@ -35,7 +35,6 @@ faces$Trial = substr(faces$ID, 6, 8)
 faces = join(faces, demograph)
 
 ## Factor the strings
-faces$Event = factor(faces$Event)
 faces$Subject = factor(faces$Subject)
 faces$Trial = factor(faces$Trial)
 faces$Age = factor(faces$Age)
@@ -48,5 +47,32 @@ faces[is.na(faces)] = 0
 colnames(faces)[1] = "Frame"
 faces = faces[, c(11, 14:17, 1:2, 12:13, 3:10)]
 
+## Fix Spelling issues in the data
+faces$Event = as.character(faces$Event)
+faces$Event[faces$Event == 'Analytical Questinos'] = 'Analytical Questions'
+faces$Event[faces$Event == 'Annalytical Questions'] = 'Analytical Questions'
+faces$Event[faces$Event == 'Emotional Equestions'] = 'Emotional Questions'
+faces$Event[faces$Event == 'Emotional Quesitons'] = 'Emotional Questions'
+faces$Event[faces$Event == 'Failure Evemt'] = 'Failure Event'
+faces$Event[faces$Event == 'Failure event'] = 'Failure Event'
+faces$Event[faces$Event == 'Failure'] = 'Failure Event'
+faces$Event[faces$Event == 'Mathematcal Question'] = 'Mathematical Questions'
+faces$Event[faces$Event == 'Mathematical Question'] = 'Mathematical Questions'
+faces$Event[faces$Event == 'Testing and Talking'] = 'Texting and Talking'
+faces$Event[faces$Event == ' Testing and Talking'] = 'Texting and Talking'
+faces$Event = factor(faces$Event)
+
 ## Saves Data Frame
 save("faces", file = "R-Data/faces.rda")
+
+
+
+
+
+
+
+
+
+
+
+
