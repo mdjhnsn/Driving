@@ -30,7 +30,7 @@ faces.cen$Sad = with(faces.cen, Sad - mu_Sad) * 100
 faces.cen$Surprise = with(faces.cen, Surprise - mu_Surprise) * 100
 faces.cen$Neutral = with(faces.cen, Neutral - mu_Neutral) * 100
 
-faces.cen = faces.cen[, -(18:27)]
+faces.cen = faces.cen[, -(19:28)]
 
 ## Calculate the average value and variance for each trial, event, expression
 stats = ddply(faces.cen, .(Subject, Trial, Event, Age, Gender, Event.Switch), summarise,
@@ -54,8 +54,7 @@ stats = ddply(faces.cen, .(Subject, Trial, Event, Age, Gender, Event.Switch), su
 stats[, 7:22] = apply(stats[, 7:22], 2, function(x) round(x, 3))
 
 faces$Texting = 0
-faces$Texting[faces$Event %in% c("Texting", "Texting and Talking", 
-                                 "Texting and Emotional Questions")] = 1
+faces$Texting[faces$Event %in% c("Texting", "Texting and Talking")] = 1
 faces$Texting = factor(faces$Texting)
 
 save(list = c("stats", "faces", "baseline", "faces.cen"), file = "R-Data/faces.rda")
