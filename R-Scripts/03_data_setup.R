@@ -57,8 +57,8 @@ faces$Texting = 0
 faces$Texting[faces$Event %in% c("Texting", "Texting and Talking")] = 1
 faces$Texting = factor(faces$Texting)
 
-save(list = c("stats", "faces", "baseline", "faces.cen"), file = "R-Data/faces.rda")
-
+save(list = "faces", file = "R-Data/faces.rda")
+save(list = c("stats", "baseline", "faces.cen"), file = "R-Data/other.rda")
 
 
 
