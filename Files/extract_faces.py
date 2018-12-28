@@ -1,52 +1,33 @@
-#!/usr/bin/env python
-'''
-Python program to extract faces data and append to a single large csv file (>600MB)
-
-File Issues: manually fix these so that the header row is 9
-  - T034-005.xlsx: header starts on row 8
-  - T009-006.xlsx: header starts on row 10
-'''
-
-
+# Load packages
 import os
 import pandas as pd
 
-# Get list of files in directory
-pwd = os.getcwd()
+# Set local variables
+cwd = os.getcwd()
+lst = sorted(os.listdir(cwd + "/Files/FACS Files"))
+path_in = cwd + "/Files/FACS Files/"
+path_out = cwd + "/Files/"
 
-lst = sorted(os.listdir(pwd + "/Files/FACS Files"))
-lst
-lst.remove('.DS_Store')
+# Create empty data frame
+output = pd.DataFrame()
 
-# Path to Files
-path = pwd + "/Files/FACS Files/"
-
-# Variable Start/Stop
-x1 = 0
-
-# First File
-output = pd.read_excel(path + lst[x1], header=8, usecols="A:J")
-
-# Create ID
-output["ID"] = lst[x1]
-
-# Loop for all of the files in
-for x in lst[x1 + 1:]:
-    if x['T034-005.xlsx']:
-        tmp = pd.read_excel(path + x, header=7, usecols="A:J", sort=False)
+# Loop through files
+for x in lst[:5]:
+    if x == 'T034-005.xlsx':
+        tmp = pd.read_excel(path_in + x, header=7, usecols="A:J", sort=False)/Users/mj/Repos/Driving/Files/extract_faces.py
         tmp["ID"] = x
         output = output.append(tmp)
-    elif x['T009-006.xlsx']:
-        tmp = pd.read_excel(path + x, header=9, usecols="A:J", sort=False)
+    elif x == 'T009-006.xlsx':
+        tmp = pd.read_excel(path_in + x, header=9, usecols="A:J", sort=False)
         tmp["ID"] = x
         output = output.append(tmp)
     else:
-        tmp = pd.read_excel(path + x, header=8, usecols="A:J", sort=False)
+        tmp = pd.read_excel(path_in + x, header=8, usecols="A:J", sort=False)
         tmp["ID"] = x
         output = output.append(tmp)
 
-# Create some ID columns
+# Create ID column
 output["ID"] = output["ID"].str[:8]
 
 # Export data
-output.to_csv("data-faces.csv", index=False)
+output.to_csv(path_out + "data-faces.csv", index=False)
