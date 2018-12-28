@@ -4,9 +4,10 @@ import pandas as pd
 
 # Set local variables
 cwd = os.getcwd()
-lst = sorted(os.listdir(cwd + "/Files/FACS Files"))
+lst = sorted(os.listdir(cwd + "/FACS Files"))
+lst.remove('.DS_Store')  # Fixes problem with Mac OS X
 path_in = cwd + "/Files/FACS Files/"
-path_out = cwd + "/Files/"
+path_out = cwd + "/"
 
 # Create empty data frame
 output = pd.DataFrame()
@@ -14,7 +15,7 @@ output = pd.DataFrame()
 # Loop through files
 for x in lst[:5]:
     if x == 'T034-005.xlsx':
-        tmp = pd.read_excel(path_in + x, header=7, usecols="A:J", sort=False)/Users/mj/Repos/Driving/Files/extract_faces.py
+        tmp = pd.read_excel(path_in + x, header=7, usecols="A:J", sort=False)
         tmp["ID"] = x
         output = output.append(tmp)
     elif x == 'T009-006.xlsx':
