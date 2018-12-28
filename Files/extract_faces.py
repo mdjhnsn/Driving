@@ -6,7 +6,7 @@ import pandas as pd
 cwd = os.getcwd()
 lst = sorted(os.listdir(cwd + "/FACS Files"))
 lst.remove('.DS_Store')  # Fixes problem with Mac OS X
-path_in = cwd + "/Files/FACS Files/"
+path_in = cwd + "/FACS Files/"
 path_out = cwd + "/"
 
 # Create empty data frame
