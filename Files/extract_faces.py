@@ -12,11 +12,14 @@ import os
 import pandas as pd
 
 # Get list of files in directory
-lst = sorted(os.listdir("Files/FACS Files"))
+pwd = os.getcwd()
+
+lst = sorted(os.listdir(pwd + "/Files/FACS Files"))
+lst
 lst.remove('.DS_Store')
 
 # Path to Files
-path = "Files/FACS Files/"
+path = pwd + "/Files/FACS Files/"
 
 # Variable Start/Stop
 x1 = 0
