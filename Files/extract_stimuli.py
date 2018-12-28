@@ -1,10 +1,15 @@
-#!/usr/bin/env python
-'''
-Python Program to extract and stimuli files to a single csv file
-'''
-
 import os
 import pandas as pd
+
+# Set local variables
+cwd = os.getcwd()
+lst = sorted(os.listdir(cwd + "/Files/Stimuli Files"))
+lst.remove('.DS_Store')  # Fixes problem with Mac OS X
+path_in = cwd + "/Files/Stimuli Files/"
+path_out = cwd + "/"
+
+# Create empty data frame
+output = pd.DataFrame()
 
 # Get list of files in directory
 lst = sorted(os.listdir("Stimuli/"))

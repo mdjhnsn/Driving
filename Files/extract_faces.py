@@ -3,17 +3,21 @@ import os
 import pandas as pd
 
 # Set local variables
-cwd = os.getcwd()
-lst = sorted(os.listdir(cwd + "/FACS Files"))
-lst.remove('.DS_Store')  # Fixes problem with Mac OS X
-path_in = cwd + "/FACS Files/"
-path_out = cwd + "/"
+lst = sorted(os.listdir("/Users/mj/Repos/Driving/Files/FACS Files"))
+path_in = "/Users/mj/Repos/Driving/Files/FACS Files/"
+path_out = "/Users/mj/Repos/Driving/Files/"
+
+# Fixes problem with Mac OS X
+try:
+    lst.remove('.DS_Store')
+except Exception:
+    pass
 
 # Create empty data frame
 output = pd.DataFrame()
 
 # Loop through files
-for x in lst[:5]:
+for x in lst[:3]:
     if x == 'T034-005.xlsx':
         tmp = pd.read_excel(path_in + x, header=7, usecols="A:J", sort=False)
         tmp["ID"] = x
