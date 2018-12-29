@@ -1,6 +1,8 @@
 # Load packages
 import os
 import pandas as pd
+from sklearn.decomposition import PCA
+
 
 # Set local variables
 lst = sorted(os.listdir("/Users/mj/Repos/Driving/Files/FACS Files"))
@@ -17,7 +19,7 @@ except Exception:
 output = pd.DataFrame()
 
 # Loop through files
-for x in lst[:3]:
+for x in lst[:10]:
     if x == 'T034-005.xlsx':
         tmp = pd.read_excel(path_in + x, header=7, usecols="A:J", sort=False)
         tmp["ID"] = x

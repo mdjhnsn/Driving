@@ -16,8 +16,8 @@ except Exception:
 output = pd.DataFrame()
 
 # Loop through files
-for x in lst[:3]:
-    tmp = pd.read_excel(path_in + x, header=8, parse_cols="A,B,E,F,G")
+for x in lst[:10]:
+    tmp = pd.read_excel(path_in + x, header=8, usecols="A,B,E,F,G")
     tmp["ID"] = x
     output = output.append(tmp)
 
