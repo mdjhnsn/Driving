@@ -17,32 +17,11 @@ except Exception:
 
 # Extract principal components
 pca = PCA(2)
-emotions = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Joy', 'Neutral', 'Sad', 'Surprise']
+
+emotions = ['Anger', 'Contempt', 'DisguEt', 'Fear', 'Joy', 'Neutral', 'Sad', 'Surprise']
 
 # Create empty data frame
 output = pd.DataFrame()
-
-# Loop through files
-for x in fls[:10]:
-    if x == 'T034-005.xlsx':
-        tmp = pd.read_excel(path_in + x, header=7, usecols='A:J', sort=False, index_col='Frame#')
-        tmp = tmp[emotions]
-        tmp_reduced = pd.DataFrame(pca.fit_transform(tmp))
-        tmp_reduced['ID'] = x
-        output = output.append(tmp_reduced)
-    elif x == 'T009-006.xlsx':
-        tmp = pd.read_excel(path_in + x, header=9, usecols='A:J', sort=False, index_col='Frame#')
-        tmp = tmp[emotions]
-        tmp_reduced = pd.DataFrame(pca.fit_transform(tmp))
-        tmp_reduced['ID'] = x
-        output = output.append(tmp_reduced)
-    else:
-        tmp = pd.read_excel(path_in + x, header=8, usecols='A:J', sort=False, index_col='Frame#')
-        tmp = tmp[emotions]
-        tmp_reduced = pd.DataFrame(pca.fit_transform(tmp))
-        tmp_reduced['ID'] = x
-        output = output.append(tmp_reduced)
-
 
 def get_header_col(file_name):
     if file_name == 'T034-005.xlsx':
@@ -53,8 +32,13 @@ def get_header_col(file_name):
         header_col = 8
     return header_col
 
-def load_file(header_col):
-
+def load_file(path_in, header_col):
+    tmp = pd.read_excel(path_in, header=header_col, usecols='A:J', sort=False, index_col='Frame#')
+    tmp = tmp[emotions]
+    tmp_reduced = pd.DataFrame(pca.fit_transform(tmp))
+    tmp_reduced['ID'].str[:8] = path_in
+    output.append(tmp_reduced)
+    return output
 
 
 # Create ID column
