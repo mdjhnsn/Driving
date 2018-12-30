@@ -18,9 +18,6 @@ except Exception:
 # Extract principal components
 pca = PCA(2)
 emotions = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Joy', 'Neutral', 'Sad', 'Surprise']
-X = df[emotions]
-X_reduced = pca.fit_transform(X)
-df2 = pd.DataFrame(X_reduced)
 
 # Create empty data frame
 output = pd.DataFrame()
@@ -45,6 +42,20 @@ for x in fls[:10]:
         tmp_reduced = pd.DataFrame(pca.fit_transform(tmp))
         tmp_reduced['ID'] = x
         output = output.append(tmp_reduced)
+
+
+def get_header_col(file_name):
+    if file_name == 'T034-005.xlsx':
+        header_col = 7
+    elif file_name == 'T009-006.xlsx':
+        header_col = 9
+    else:
+        header_col = 8
+    return header_col
+
+def load_file(header_col):
+
+
 
 # Create ID column
 output['ID'] = output['ID'].str[:8]
